@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="main_menu_ndermjetes" name="Ndermjetes" />
+
+<!-- Punekerkuesi -->
+
+        <record id="view_punekerkues_kanban" model="ir.ui.view">
+        <field name="name">boii.kanban</field>
+        <field name="model">employer.punekerkues</field>
+        <field name="arch" type="xml">
+            <kanban string="Punekerkues">
+                <field name="emri"/>
+                <field name="mbiemri"/>
+                <field name="datelindje"/>
+                <field name="nr_identifikues"/>
+                <field name="informacion"/>
+                <field name="nr_aplikime"/>
+                 <templates>
+                    <t t-name="kanban-box">
+                        <div
+                            t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color)} oe_kanban_card oe_kanban_global_click">
+                            <div class="o_dropdown_kanban dropdown" groups="base.group_user">
+                                <a class="dropdown-toggle btn" data-toggle="dropdown" href="#">
+                                    <span class="fa fa-bars fa-lg" />
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <t t-if="widget.editable">
+                                        <li>
+                                            <a type="edit">Edit</a>
+                                        </li>
+                                    </t>
+                                    <t t-if="widget.deletable">
+                                        <li>
+                                            <a type="delete">Delete</a>
+                                        </li>
+                                    </t>
+                                    <li>
+                                        <ul class="oe_kanban_colorpicker" data-field="color" />
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-xs-7 o_kanban_primary_right">
+                                <button class="btn btn-primary" name="%(open_view_historik_kanban)d" type="action">Historik Aplikimesh</button>
+                            </div>
+
+                            <div class="oe_kanban_details" style='margin-top: -5px;'>
+                                <div class="oe_kanban_content">
+                                    <div class="oe_kanban_project_list">
+                                        <H3>
+                                            <a type="open">
+                                                <t t-if="record.code" style="margin-right: 10px">
+                                                    [
+
+                                                    ]
+                                                </t>
+                                                <field name="emri" /> <field name="mbiemri"/>
+                                            </a>
+                                        </H3>
+                                    </div>
+                                    <div name="tags" />
+                                    <ul>
+                                        <li>
+                                            Nr. Personal:
+
+                                            <field name="nr_identifikues"></field>
+                                        </li>
+                                        <li>
+                                            Nr. i Aplikimeve:
+
+                                            <field name="nr_aplikime"></field>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="oe_kanban_bottom_right">
+
+                                </div>
+                            </div>
+                                <div class="oe_clear"></div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_punekerkues_form" model="ir.ui.view">
+            <field name="name">boii.form</field>
+            <field name="model">employer.punekerkues</field>
+            <field name="arch" type="xml">
+                <form string="Punekerkues">
+                     <group>
+                         <field name="emri"/>
+                         <field name="mbiemri"/>
+                         <field name="datelindje"/>
+                         <field name="nr_identifikues"/>
+                         <field name="informacion"/>
+                         <field name="nr_aplikime"/>
+                     </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_punekerkues_tree" model="ir.ui.view">
+            <field name="name">boii.tree</field>
+            <field name="model">employer.punekerkues</field>
+            <field name="arch" type="xml">
+                <tree string="Punekerkues">
+                         <field name="emri"/>
+                         <field name="mbiemri"/>
+                         <field name="datelindje"/>
+                         <field name="nr_identifikues"/>
+                         <field name="informacion"/>
+                         <field name="nr_aplikime"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_punekerkues_search" model="ir.ui.view">
+            <field name="name">boii.search</field>
+            <field name="model">employer.punekerkues</field>
+            <field name="arch" type="xml">
+                <search string="Punekerkues">
+                         <field name="emri"/>
+                         <field name="mbiemri"/>
+                         <field name="datelindje"/>
+                         <field name="nr_identifikues"/>
+                         <field name="informacion"/>
+                         <field name="nr_aplikime"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="open_view_punekerkues_kanban" model="ir.actions.act_window">
+            <field name="name">Punekerkues</field>
+            <field name="res_model">employer.punekerkues</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_id" ref="view_punekerkues_kanban"/>
+            <field name="search_view_id" ref="view_punekerkues_search"/>
+        </record>
+
+
+        <menuitem
+                id="menu_open_view_punekerkues"
+                action="open_view_punekerkues_kanban"
+                parent="main_menu_ndermjetes"
+                sequence="1"/>
+
+<!-- Punedhenesi -->
+
+        <record id="view_punedhenes_kanban" model="ir.ui.view">
+        <field name="name">boii.kanban</field>
+        <field name="model">employer.punedhenes</field>
+        <field name="arch" type="xml">
+            <kanban string="Punedhenes">
+                <field name="emri"/>
+                <field name="NIPT"/>
+                <field name="nr_vakante"/>
+                 <templates>
+                    <t t-name="kanban-box">
+                        <div
+                            t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color)} oe_kanban_card oe_kanban_global_click">
+                            <div class="o_dropdown_kanban dropdown" groups="base.group_user">
+                                <a class="dropdown-toggle btn" data-toggle="dropdown" href="#">
+                                    <span class="fa fa-bars fa-lg" />
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <t t-if="widget.editable">
+                                        <li>
+                                            <a type="edit">Edit</a>
+                                        </li>
+                                    </t>
+                                    <t t-if="widget.deletable">
+                                        <li>
+                                            <a type="delete">Delete</a>
+                                        </li>
+                                    </t>
+                                    <li>
+                                        <ul class="oe_kanban_colorpicker" data-field="color" />
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="oe_kanban_details" style='margin-top: -5px;'>
+                                <div class="oe_kanban_content">
+                                    <div class="oe_kanban_project_list">
+                                        <H3>
+                                            <a type="open">
+                                                <t t-if="record.code" style="margin-right: 10px">
+                                                    [
+
+                                                    ]
+                                                </t>
+                                                <field name="emri" />
+                                            </a>
+                                        </H3>
+                                    </div>
+                                    <div name="tags" />
+                                    <ul>
+                                        <li>
+                                            NIPT:
+
+                                            <field name="NIPT"></field>
+                                        </li>
+                                        <li>
+                                            Nr. i Pozicioneve Vakante:
+                                            <field name="nr_vakante"></field>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="oe_kanban_bottom_right">
+
+                                </div>
+                            </div>
+                            <div class="oe_clear"></div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+</record>
+
+        <record id="view_punedhenes_form" model="ir.ui.view">
+            <field name="name">boii.form</field>
+            <field name="model">employer.punedhenes</field>
+            <field name="arch" type="xml">
+                <form string="Punedhenes">
+                     <group>
+                         <field name="emri"/>
+                         <field name="NIPT"/>
+                         <field name="nr_vakante"/>
+                         <field name="nr_kontakt"/>
+                         <field name="email"/>
+                         <field name="pozicion_id"/>
+                     </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_punedhenes_tree" model="ir.ui.view">
+            <field name="name">boii.tree</field>
+            <field name="model">employer.punedhenes</field>
+            <field name="arch" type="xml">
+                <tree string="Punedhenes">
+                         <field name="emri"/>
+                         <field name="NIPT"/>
+                         <field name="nr_vakante"/>
+                         <field name="nr_kontakt"/>
+                         <field name="email"/>
+                         <field name="pozicion_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_punedhenes_search" model="ir.ui.view">
+            <field name="name">boii.search</field>
+            <field name="model">employer.punedhenes</field>
+            <field name="arch" type="xml">
+                <search string="Punedhenes">
+                         <field name="emri"/>
+                         <field name="NIPT"/>
+                         <field name="nr_vakante"/>
+                         <field name="nr_kontakt"/>
+                         <field name="email"/>
+                         <field name="pozicion_id"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="open_view_punedhenes_kanban" model="ir.actions.act_window">
+            <field name="name">Punedhenes</field>
+            <field name="res_model">employer.punedhenes</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_id" ref="view_punedhenes_kanban"/>
+            <field name="search_view_id" ref="view_punedhenes_search"/>
+        </record>
+
+        <menuitem
+                id="menu_open_view_punedhenes"
+                action="open_view_punedhenes_kanban"
+                parent="main_menu_ndermjetes"
+                sequence="1"/>
+
+        <!-- Pozicionet e punes -->
+        <record id="view_pozicione_kanban" model="ir.ui.view">
+        <field name="name">boii.kanban</field>
+        <field name="model">employer.pozicione</field>
+        <field name="arch" type="xml">
+            <kanban string="Pozicione vakante">
+                <field name="titull"/>
+                <field name="nr_kerkuar"/>
+                <field name="informacion"/>
+                <field name="date_fillimi"/>
+                <field name="date_mbarimi"/>
+                <field name="status"/>
+                <field name="punedhenes_id"/>
+                 <templates>
+                    <t t-name="kanban-box">
+                        <div
+                            t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color)} oe_kanban_card oe_kanban_global_click">
+                            <div class="o_dropdown_kanban dropdown" groups="base.group_user">
+                                <a class="dropdown-toggle btn" data-toggle="dropdown" href="#">
+                                    <span class="fa fa-bars fa-lg" />
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <t t-if="widget.editable">
+                                        <li>
+                                            <a type="edit">Edit</a>
+                                        </li>
+                                    </t>
+                                    <t t-if="widget.deletable">
+                                        <li>
+                                            <a type="delete">Delete</a>
+                                        </li>
+                                    </t>
+                                    <li>
+                                        <ul class="oe_kanban_colorpicker" data-field="color" />
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="oe_kanban_details" style='margin-top: -5px;'>
+                                <div class="oe_kanban_content">
+                                    <div class="oe_kanban_project_list">
+                                        <H3>
+                                            <a type="open">
+                                                <t t-if="record.code" style="margin-right: 10px">
+                                                    [
+
+                                                    ]
+                                                </t>
+                                                <field name="titull" />
+                                            </a>
+                                        </H3>
+                                    </div>
+                                    <div name="tags" />
+                                    <ul>
+                                        <li>
+                                            Punedhenesi:
+
+                                            <field name="punedhenes_id"></field>
+                                        </li>
+
+                                        <li>
+                                            Nga:
+
+                                            <field name="date_fillimi"></field>
+                                        </li>
+                                        <li>
+                                            Deri:
+                                            <field name="date_mbarimi"></field>
+                                        </li>
+                                        <li>
+                                            Statusi:
+                                            <field name="status"></field>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="oe_kanban_bottom_right">
+                                    <a t-if="record.status === 'Vakant'" type="object"
+                                        string="Vakant" name="set_room_status_vakant"
+                                        class="oe_kanban_status oe_kanban_status_green ">
+                                    </a>
+                                    <a t-if="record.status === 'I Zënë'" type="object"
+                                        string="I zënë" name="set_room_status_zene"
+                                        class="oe_kanban_status oe_kanban_status_red ">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="oe_clear"></div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+</record>
+
+        <record id="view_pozicione_form" model="ir.ui.view">
+            <field name="name">boii.form</field>
+            <field name="model">employer.pozicione</field>
+            <field name="arch" type="xml">
+                <form string="Pozicione Vakante">
+                     <group>
+                         <field name="titull"/>
+                         <field name="nr_kerkuar"/>
+                         <field name="informacion"/>
+                         <field name="date_fillimi"/>
+                         <field name="date_mbarimi"/>
+                         <field name="status"/>
+                         <field name="punedhenes_id"/>
+                         <field name="aplikim_id"/>
+                         <button class="btn btn-primary" name="%(open_view_aplikim_tree)d" type="action">Apliko</button>
+                     </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_pozicione_tree" model="ir.ui.view">
+            <field name="name">boii.tree</field>
+            <field name="model">employer.pozicione</field>
+            <field name="arch" type="xml">
+                <form string="Pozicione Vakante">
+                     <group>
+                         <field name="titull"/>
+                         <field name="nr_kerkuar"/>
+                         <field name="informacion"/>
+                         <field name="date_fillimi"/>
+                         <field name="date_mbarimi"/>
+                         <field name="status"/>
+                         <field name="punedhenes_id"/>
+                         <field name="aplikim_id"/>
+                     </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_pozicione_search" model="ir.ui.view">
+            <field name="name">boii.search</field>
+            <field name="model">employer.pozicione</field>
+            <field name="arch" type="xml">
+                <form string="Pozicionet Vakante">
+                     <group>
+                         <field name="titull"/>
+                         <field name="nr_kerkuar"/>
+                         <field name="informacion"/>
+                         <field name="date_fillimi"/>
+                         <field name="date_mbarimi"/>
+                         <field name="status"/>
+                         <field name="punedhenes_id"/>
+                         <field name="aplikim_id"/>
+                     </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="open_view_pozicione_kanban" model="ir.actions.act_window">
+            <field name="name">Pozicione Pune</field>
+            <field name="res_model">employer.pozicione</field>
+
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_id" ref="view_pozicione_kanban"/>
+            <field name="search_view_id" ref="view_pozicione_search"/>
+        </record>
+
+        <menuitem
+                id="menu_open_view_pozicione"
+                action="open_view_pozicione_kanban"
+                parent="main_menu_ndermjetes"
+                sequence="1"/>
+-->
+
+        <!-- Historiku -->
+
+        <record id="view_historik_kanban" model="ir.ui.view">
+        <field name="name">boii.kanban</field>
+        <field name="model">employer.historik</field>
+        <field name="arch" type="xml">
+            <kanban string="Historik">
+                <field name="pozicion_id"/>
+                <field name="punedhenes_id"/>
+                <field name="date_aplikimi"/>
+
+                 <templates>
+                    <t t-name="kanban-box">
+                        <div
+                            t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color)} oe_kanban_card oe_kanban_global_click">
+                            <div class="o_dropdown_kanban dropdown" groups="base.group_user">
+                                <a class="dropdown-toggle btn" data-toggle="dropdown" href="#">
+                                    <span class="fa fa-bars fa-lg" />
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <t t-if="widget.editable">
+                                        <li>
+                                            <a type="edit">Edit</a>
+                                        </li>
+                                    </t>
+                                    <t t-if="widget.deletable">
+                                        <li>
+                                            <a type="delete">Delete</a>
+                                        </li>
+                                    </t>
+                                    <li>
+                                        <ul class="oe_kanban_colorpicker" data-field="color" />
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="oe_kanban_details" style='margin-top: -5px;'>
+                                <div class="oe_kanban_content">
+                                    <div class="oe_kanban_project_list">
+                                        <H3>
+                                            <a type="open">
+                                                <t t-if="record.code" style="margin-right: 10px">
+                                                    [
+
+                                                    ]
+                                                </t>
+                                                <field name="pozicion_id" />
+                                            </a>
+                                        </H3>
+                                    </div>
+                                    <div name="tags" />
+                                    <ul>
+                                        <li>
+                                            Punedhenesi:
+
+                                            <field name="punedhenes_id"></field>
+                                        </li>
+                                        <li>
+                                            Aplikuar:
+
+                                            <field name="date_aplikimi"></field>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                                <div class="oe_clear"></div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+        <record id="view_historik_form" model="ir.ui.view">
+            <field name="name">boii.form</field>
+            <field name="model">employer.historik</field>
+            <field name="arch" type="xml">
+                <form string="Historik">
+                     <group>
+                         <field name="pozicion_id"/>
+                         <field name="punedhenes_id"/>
+                         <field name="date_aplikimi"/>
+                     </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_historik_tree" model="ir.ui.view">
+            <field name="name">boii.tree</field>
+            <field name="model">employer.historik</field>
+            <field name="arch" type="xml">
+                <form string="Historik">
+                     <group>
+                         <field name="pozicion_id"/>
+                         <field name="punedhenes_id"/>
+                         <field name="date_aplikimi"/>
+                     </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_historik_search" model="ir.ui.view">
+            <field name="name">boii.search</field>
+            <field name="model">employer.historik</field>
+            <field name="arch" type="xml">
+                <form string="Historik">
+                     <group>
+                         <field name="pozicion_id"/>
+                         <field name="punedhenes_id"/>
+                         <field name="date_aplikimi"/>
+                     </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="open_view_historik_kanban" model="ir.actions.act_window">
+            <field name="name">Historik Aplikimesh</field>
+            <field name="res_model">employer.historik</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_id" ref="view_historik_kanban"/>
+            <field name="search_view_id" ref="view_historik_search"/>
+        </record>
+
+     <!--   <menuitem
+                id="menu_open_view_historik"
+                action="open_view_historik_kanban"
+                parent="main_menu_ndermjetes"
+                sequence="1"/>
+                -->
+
+        <!-- Aplikimi -->
+
+        <record id="view_aplikim_form" model="ir.ui.view">
+            <field name="name">boii.form</field>
+            <field name="model">employer.apliko</field>
+            <field name="arch" type="xml">
+                <form string="Aplikim">
+                     <group>
+                         <field name="pozicion_id"/>
+                         <field name="punekerkues_id"/>
+                     </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_aplikim_search" model="ir.ui.view">
+            <field name="name">boii.search</field>
+            <field name="model">employer.apliko</field>
+            <field name="arch" type="xml">
+                <form string="Aplikim">
+                     <group>
+                         <field name="pozicion_id"/>
+                         <field name="punekerkues_id"/>
+                     </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_aplikim_tree" model="ir.ui.view">
+            <field name="name">boii.tree</field>
+            <field name="model">employer.apliko</field>
+            <field name="arch" type="xml">
+                <form string="Apliko">
+                     <group>
+                          <field name="pozicion_id"/>
+                         <field name="punekerkues_id"/>
+                     </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="open_view_aplikim_tree" model="ir.actions.act_window">
+            <field name="name">Apliko</field>
+            <field name="res_model">employer.apliko</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree, form</field>
+            <field name="view_id" ref="view_aplikim_tree"/>
+            <field name="search_view_id" ref="view_aplikim_search"/>
+        </record>
+
+
+<!--
+        <menuitem
+                id="menu_open_view_aplikim"
+                action="open_view_aplikim_tree"
+                parent="main_menu_ndermjetes"
+                sequence="1"/>
+-->
+
+    </data>
+</odoo>
